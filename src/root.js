@@ -5,13 +5,16 @@
  */
 import React, { Component } from 'react'
 import { Router } from 'react-native-router-flux'
+import { Provider } from 'react-redux'
 import scenes from './navigations/routes'
-import { View, Text, StyleSheet } from 'react-native'
+import store from './config/store'
 
 export default class Root extends Component {
    render() {
     return (
-      <Router scenes={scenes} />
+      <Provider store= {store}>
+        <Router scenes={scenes} />
+      </Provider>
     );
   }
 
