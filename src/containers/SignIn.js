@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { Field, reduxForm } from 'redux-form'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
 import styles from '../config/styles'
 
-export default class SignIn extends Component {
+class SignIn extends Component {
  constructor(props) {
    super(props);
    this.state = {
@@ -21,8 +22,13 @@ export default class SignIn extends Component {
    })
  }
 
+ const renderInput = ({ input: { onChange, ...restInput }}) => {
+   return(<TextInput style={styles.input} onChangeText={onChange} {...restInput} />) 
+ }
+
   render() {
     const { handleSubmit } = this.props
+
     return (
       <Image style={styles.splashScreen} source={require('../assets/bg_signin.png')}>
       <View style={styles.container}>
@@ -43,6 +49,7 @@ export default class SignIn extends Component {
             <TextInput style={styles.inputField}
                 onChangeText={this.handleUsername}
                 value={this.state.userName} />
+              <Field name="name" component={renderInput} />
           </View>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/password.png')} />
@@ -61,7 +68,7 @@ export default class SignIn extends Component {
          </TouchableOpacity>
          <View style={styles.coverTxtAccount}>
            <Text style={styles.txtAccount}>Don't have an account?</Text>
-           <TouchableOpacity style={styles.coverSignUp}>
+           <TouchableOpacity style={styles.coverSignUp} onPress={handleSubmit}>
              <Text style={styles.txtSignUp}>SignUp</Text>
           </TouchableOpacity>
          </View>
@@ -80,6 +87,6 @@ export default class SignIn extends Component {
 // }
 
 //export default connect(null, mapDispatchToProps)(SignIn)
-// export default reduxForm({
-//   form: 'signIn'
-// })(SignIn)
+export default reduxForm({
+  form: 'formReducerSignIn'
+})(SignIn)
