@@ -22,8 +22,8 @@ class SignIn extends Component {
    })
  }
 
- const renderInput = ({ input: { onChange, ...restInput }}) => {
-   return(<TextInput style={styles.input} onChangeText={onChange} {...restInput} />) 
+ renderInput = ({ input: { onChange, ...restInput }}) => {
+   return(<TextInput style={styles.input} onChangeText={onChange} {...restInput} />)
  }
 
   render() {
@@ -49,7 +49,7 @@ class SignIn extends Component {
             <TextInput style={styles.inputField}
                 onChangeText={this.handleUsername}
                 value={this.state.userName} />
-              <Field name="name" component={renderInput} />
+              <Field name="name" component={this.renderInput} />
           </View>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/password.png')} />
