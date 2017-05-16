@@ -11,19 +11,14 @@ class SignIn extends Component {
      password: 'password',
    };
  }
- handleUsername = (e) => {
-   this.setState({
-     userName: e.value
-   })
- }
- handlePassword = (e) => {
-   this.setState({
-     password: e.value
-   })
- }
 
- renderInput = ({ input: { onChange, ...restInput }}) => {
-   return(<TextInput style={styles.input} onChangeText={onChange} {...restInput} />)
+ renderInput = ({ input: { onChange, ...restInput }, label, placeholder}) => {
+   console.log(placeholder);
+   return(<TextInput
+     style={styles.inputField}
+     onChangeText={onChange}
+     placeholder={placeholder}
+     {...restInput} />)
  }
 
   render() {
@@ -46,10 +41,8 @@ class SignIn extends Component {
         <View style={styles.formBottom}>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/user_name.png')} />
-            <TextInput style={styles.inputField}
-                onChangeText={this.handleUsername}
-                value={this.state.userName} />
-              <Field name="name" component={this.renderInput} />
+              <Field name="name" component={this.renderInput}
+                placeholder="User Name" />
           </View>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/password.png')} />
