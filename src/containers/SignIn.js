@@ -12,13 +12,21 @@ class SignIn extends Component {
    };
  }
 
- renderInput = ({ input: { onChange, ...restInput }, label, placeholder}) => {
-   console.log(placeholder);
-   return(<TextInput
-     style={styles.inputField}
-     onChangeText={onChange}
-     placeholder={placeholder}
-     {...restInput} />)
+ renderInput = ({ input: { onChange, ...restInput },
+   meta: {touched, error, warning},
+   label, placeholder, secureTextEntry}) => {
+     console.log(touched);
+     return(
+       <View style={styles.coverLineInput}>
+           <TextInput
+           style={styles.inputField}
+           onChangeText={onChange}
+           placeholder={placeholder}
+           secureTextEntry={secureTextEntry}
+           {...restInput} />
+         { touched && ((error && <Text style={styles.textError}>{error}</Text>) || (warning && <Text>{warning}</Text>))}
+       </View>
+   )
  }
 
   render() {
@@ -46,15 +54,13 @@ class SignIn extends Component {
           </View>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/password.png')} />
-            <TextInput style={styles.inputField}
-              secureTextEntry={true}
-              onChangeText={this.handlePassword}
-              value={this.state.password} />
+            <Field name="pass" component={this.renderInput}
+                placeholder="Password" secureTextEntry={true}/>
           </View>
           <TouchableOpacity style={styles.forgotPass}>
             <Text style={styles.forgotPass}>Forgot Password!</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.coverButtonOk}>
+          <TouchableOpacity style={styles.coverButtonOk} onPress={handleSubmit}>
             <Text style={styles.txtOk}>
               SignIn
             </Text>
@@ -71,7 +77,16 @@ class SignIn extends Component {
     );
   }
 }
-
+const validate = (values) => {
+  const errors = {}
+  if(!values.name) {
+    errors.name = 'Name should not the blank'
+  }
+  if(!values.pass) {
+    errors.pass = 'Password should not the blank'
+  }
+  return errors;
+}
 // const mapStateToProps = () => {
 //
 // }
@@ -81,5 +96,6 @@ class SignIn extends Component {
 
 //export default connect(null, mapDispatchToProps)(SignIn)
 export default reduxForm({
-  form: 'formReducerSignIn'
+  form: 'formReducerSignIn',
+  validate
 })(SignIn)

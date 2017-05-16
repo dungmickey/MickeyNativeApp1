@@ -20,18 +20,27 @@ const styles = StyleSheet.create({
      paddingRight: 30,
      paddingBottom: 3,
    },
+   coverLineInput: {
+     flexDirection: 'column',
+     flex: 0.7,
+   },
    inputField: {
      height: 36,
      borderColor: 'gray',
      borderWidth: 1,
      width: '100%',
-     flex: 0.7,
    },
    imgIcon: {
      width: 26,
      height: 27,
      marginRight: 10,
      alignSelf: 'center',
+   },
+   textError: {
+     color: 'red',
+     backgroundColor: 'transparent',
+     fontSize: 12,
+     paddingTop: 2,
    },
    forgotPass: {
      color: 'white',
