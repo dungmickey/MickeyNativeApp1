@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Field, reduxForm, Form } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
-//import { signIn } from '../redux/signInReducer'
+import { signIn } from '../redux/signInReducer'
 import styles from '../config/styles'
 
 class SignIn extends Component {
@@ -30,7 +30,7 @@ class SignIn extends Component {
  }
 
  submit = (values) => {
-   console.log(values)
+   //console.log(values)
    this.props.signIn(values)
  }
   render() {
@@ -53,8 +53,8 @@ class SignIn extends Component {
         <View style={styles.formBottom}>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/user_name.png')} />
-              <Field name='name' component={this.renderInput}
-                placeholder="User Name" />
+              <Field name='email' component={this.renderInput}
+                placeholder="email" />
                 <TextInput
                   style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                   onChangeText={(text) => this.setState({text})}
@@ -63,7 +63,7 @@ class SignIn extends Component {
           </View>
           <View style={styles.lineRow}>
             <Image style={styles.imgIcon} source={require('../assets/password.png')} />
-            <Field name="pass" component={this.renderInput}
+            <Field name="password" component={this.renderInput}
                 placeholder="Password" secureTextEntry={true}/>
           </View>
           <TouchableOpacity style={styles.forgotPass}>
@@ -76,7 +76,7 @@ class SignIn extends Component {
          </TouchableOpacity>
          <View style={styles.coverTxtAccount}>
            <Text style={styles.txtAccount}>Don't have an account?</Text>
-           <TouchableOpacity style={styles.coverSignUp} onPress={handleSubmit}>
+           <TouchableOpacity style={styles.coverSignUp}>
              <Text style={styles.txtSignUp}>SignUp</Text>
           </TouchableOpacity>
          </View>
@@ -88,8 +88,8 @@ class SignIn extends Component {
 }
 const validate = (values) => {
   const errors = {}
-  if(!values.name) {
-    errors.name = 'Name should not the blank'
+  if(!values.email) {
+    errors.email = 'Email should not the blank'
   }
   if(!values.pass) {
     errors.pass = 'Password should not the blank'
@@ -100,16 +100,17 @@ const validate = (values) => {
 // const mapStateToProps = () => {
 //
 // }
-// const mapDispatchToProps = () => {
-//   signIn
-// }
-// const SignInWrap = reduxForm({
-//   form: 'formReducerSignIn',
-//   validate
-// })(SignIn)
-
-//export default connect(null, null)(SignInWrap)
-export default reduxForm({
+const mapDispatchToProps = {
+  signIn
+}
+const SignInWrap = reduxForm({
   form: 'formReducerSignIn',
   validate
 })(SignIn)
+
+//export default SignInWrap;
+export default connect(null, mapDispatchToProps)(SignInWrap)
+// export default reduxForm({
+//   form: 'formReducerSignIn',
+//   validate
+// })(SignIn)
