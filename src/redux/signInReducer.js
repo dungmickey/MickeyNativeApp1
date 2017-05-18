@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux';
 import AuthenticationService from '../network/AuthenticationService'
 //=============================//
 //      Action Types
@@ -37,6 +38,7 @@ export function signIn(userInfos) {
       console.log('LOGIN RESPONSE');
       console.log(json);
         dispatch(signInSuccess(json));
+        Actions.accountSummary();
     })
     .catch(error => {
       dispatch(signInFailed(error));

@@ -67,7 +67,7 @@ class SignIn extends Component {
                 placeholder="Password" secureTextEntry={true}/>
           </View>
           <TouchableOpacity style={styles.forgotPass}>
-            <Text style={styles.forgotPass}>Forgot Password!</Text>
+            <Text style={styles.textForgotPass}>Forgot Password!</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.coverButtonOk} onPress={handleSubmit(this.submit)}>
             <Text style={styles.txtOk}>
@@ -105,7 +105,8 @@ const mapDispatchToProps = {
 }
 const SignInWrap = reduxForm({
   form: 'formReducerSignIn',
-  validate
+  validate,
+  initialValues: {email:'duy.le@gmail.com',password: '123456'}
 })(SignIn)
 
 //export default SignInWrap;

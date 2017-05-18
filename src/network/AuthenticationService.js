@@ -11,4 +11,16 @@ export default class AuthenticationService {
       return json;
     });
   }
+
+  // static getListUser() {
+  //   return Api.requestData('GET', 'trainees')
+  //   .then(json => {
+  //     return json;
+  //   });
+  // }
+  static getListUser() {
+    const headerToken = { "x-access-token": MemCache.get(Constants.memcacheKeys.accessToken) }
+    return Api.requestData('GET', 'trainees', headerToken);
+  }
+
 }

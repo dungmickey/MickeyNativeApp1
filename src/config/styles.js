@@ -43,11 +43,13 @@ const styles = StyleSheet.create({
      paddingTop: 2,
    },
    forgotPass: {
-     color: 'white',
-     fontSize: 14,
-     paddingRight: 15,
-     textAlign: 'right',
      backgroundColor: 'transparent',
+   },
+   textForgotPass: {
+     color: 'white',
+     textAlign: 'right',
+     paddingRight: 30,
+     fontSize: 14,
    },
    coverIconHamburger: {
      flex: 0.2,
